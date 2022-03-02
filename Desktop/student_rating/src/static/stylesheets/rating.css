@@ -1,0 +1,36 @@
+table {
+    text-align: center;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+th {
+    width: 10%;
+    background-color: rgba(161, 92, 56, 0.26);
+}
+
+.content > table {
+    margin: auto;
+}
+
+tr {
+    /*background-color: #ff8080;*/
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: rgba(161, 92, 56, 0.15);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(239, 235, 235, 0.71);
+}
+
+tr:hover {
+    background-color: rgba(161, 92, 56, 0.34);
+}
+

@@ -1,0 +1,128 @@
+--------------------------------------------------------------------------------
+                                 LOGIN
+--------------------------------------------------------------------------------
+curl -u user1:password -i -X GET 'http://127.0.0.1:5000/login'
+curl -u teacher:password -i -X GET 'http://127.0.0.1:5000/login'
+curl -u student:password -i -X GET 'http://127.0.0.1:5000/login'
+
+--------------------------------------------------------------------------------
+                                 LOGOUT
+--------------------------------------------------------------------------------
+curl -u user1:password1 -i -X GET 'http://127.0.0.1:5000/logout'
+curl -u teacher:password2 -i -X GET 'http://127.0.0.1:5000/logout'
+curl -u student:password2 -i -X GET 'http://127.0.0.1:5000/logout'
+
+
+--------------------------------------------------------------------------------
+                                 REGISTER
+--------------------------------------------------------------------------------
+curl --location --request POST 'http://127.0.0.1:5000/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "user10@gmail.com",
+    "username": "user10",
+    "password": "password",
+    "first_name": "User1",
+    "last_name": "User1",
+    "phone": "1111"
+}'
+curl --location --request POST 'http://127.0.0.1:5000/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "user2@gmail.com",
+    "username": "user2",
+    "password": "password",
+    "first_name": "User2",
+    "last_name": "User2",
+    "phone": "1111"
+}'
+curl --location --request POST 'http://127.0.0.1:5000/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "teacher@staff",
+    "username": "teacher",
+    "password": "password",
+    "first_name": "Teacher",
+    "last_name": "Teacher",
+    "phone": "1111"
+}'
+
+curl --location --request POST 'http://127.0.0.1:5000/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "student@lpnu",
+    "username": "student",
+    "password": "password",
+    "first_name": "Student",
+    "last_name": "Student",
+    "phone": "1111"
+}'
+--------------------------------------------------------------------------------
+                                 USER
+--------------------------------------------------------------------------------
+curl -u teacher:password -i -X GET 'http://127.0.0.1:5000/user'
+curl -u user:password -i -X GET 'http://127.0.0.1:5000/user'
+curl -u student:password -i -X GET 'http://127.0.0.1:5000/user'
+
+
+curl -u user2:password -i -X PUT 'http://127.0.0.1:5000/user/user1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "user2@gmail.com",
+    "username": "user",
+    "password": "passwword",
+    "first_name": "User2",
+    "last_name": "User2",
+    "phone": "1111"
+}'
+
+curl -u mary:password2 -i -X PATCH 'http://127.0.0.1:5000/user/user1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "password": "password22"
+}'
+
+curl -u olenka:password1 -i -X DELETE 'http://127.0.0.1:5000/user/user2'
+--------------------------------------------------------------------------------
+                                 MARK
+--------------------------------------------------------------------------------
+curl -u user10:password -i -X POST 'http://127.0.0.1:5000/mark' --header 'Content-Type: application/json' --data-raw '{
+        "id_student": 2,
+        "grade": 5,
+        "id_mark": 2,
+        "id_user": 1,
+        "id_subject": 1
+    }'
+
+curl -u student:password -i -X POST 'http://127.0.0.1:5000/mark' --header 'Content-Type: application/json' --data-raw '{
+        "id_student": 2,
+        "grade": 5,
+        "id_mark": 2,
+        "id_user": 1,
+        "id_subject": 1
+    }'
+curl -u teacher:password -i -X POST 'http://127.0.0.1:5000/mark' --header 'Content-Type: application/json' --data-raw '{
+        "id_student": 2,
+        "grade": 5,
+        "id_mark": 2,
+        "id_user": 1,
+        "id_subject": 1
+    }'
+curl -u emili:password2 -i -X GET 'http://127.0.0.1:5000/mark'
+curl -u user10:password -i -X GET 'http://127.0.0.1:5000/mark'
+curl -u teacher:password -i -X GET 'http://127.0.0.1:5000/mark'
+--------------------------------------------------------------------------------
+                                 STUDENT
+--------------------------------------------------------------------------------
+curl -u teacher:password -i -X POST 'http://127.0.0.1:5000/student' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "last_name_student": "Bondarenko",
+    "rating": "30",
+    "name_student": "Emilia8",
+    "email": "e0@lpnu",
+    "id_user": 2
+}'
+
+
+curl -u emili:password2 -i -X GET 'http://127.0.0.1:5000/mark'

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='stylesheets/users.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_admin %}
+            <li><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/register">Register</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="active"><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="content editContent">
+    <h1>CREATE STUDENT</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label>First name</label>
+            <input type="text" name="name_student"
+                   placeholder="Post first name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Last name</label>
+            <input type="text" name="last_name_student"
+                   placeholder="Post last name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Rating</label>
+            <input type="text" name="rating"
+                   placeholder="Post rating" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email"
+                   placeholder="Post email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>User id</label>
+            <input type="text" name="id_user"
+                   placeholder="Post id_user" class="form-control">
+        </div>
+
+        <div class="myBtn">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</main>
+<footer>
+    <p>2022 &copy;Copyright by Olena Peretiatko</p>
+</footer>
+</body>
+</html>

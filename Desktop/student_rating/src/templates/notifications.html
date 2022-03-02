@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_authenticated %}
+            <li><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <div class="active">
+                <li><a href="/login">Login</a></li>
+            </div>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
+    <p>{{ message }}</p>
+</main>
+<footer>
+    <p>2022 &copy;Copyright by Olena Peretiatko</p>
+</footer>
+</body>
+</html>

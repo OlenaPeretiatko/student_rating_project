@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='stylesheets/users.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_admin %}
+            <li><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/register">Register</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="active"><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="content editContent">
+    <form method="post">
+        <h1>Mark student {{full_name}} </h1>
+        <div class="form-group">
+            <label>Mark</label>
+            <input type="text" name="grade"
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label>id_subject</label>
+            <input type="text" name="id_subject"
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label>id_user</label>
+            <input type="text" name="id_user"
+                   class="form-control">
+        </div>
+        <div class="myBtn">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+    </form>
+</main>
+
+</body>
+</html>

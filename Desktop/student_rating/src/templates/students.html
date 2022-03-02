@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='stylesheets/users.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_authenticated %}
+            <li><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="active"><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="content">
+    {% if current_user.is_admin == False %}
+    <p>Important! You can see information only about you, as you are not administrator.</p>
+    {% endif %}
+
+    {% for student in students %}
+    <div class="student">
+        <div class="contentLeft">
+            <p>Student Id: {{student.id_student}}</p>
+            <p>First Name: {{student.name_student}}</p>
+            <p>Last Name: {{student.last_name_student}}</p>
+            <p>Email: {{student.email}}</p>
+        </div>
+        <div class="myBtnsRight">
+            {% if current_user.is_admin %}
+            <a href="editStudent/{{student['id_student']}}">
+                <button>Edit Student</button>
+            </a>
+            <br>
+            <a href="mark/{{student['id_student']}}">
+                <button>Mark this student</button>
+            </a>
+            <br>
+            <a href="allMarks/{{student['id_student']}}">
+                <button>Watch all marks</button>
+            </a>
+            <br>
+            <form action="deleteStudent/{{student['id_student']}}" method="POST">
+                <input type="submit" value="Delete Student"
+                       class="btn btn-danger btn-sm">
+            </form>
+            <br>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% if current_user.is_admin %}
+    <div class="myBtn">
+        <a href="addStudent">
+            <button>Add Student</button>
+        </a>
+        {% endif %}
+    </div>
+</main>
+<footer>
+    <p>2022 &copy;Copyright by Olena Peretiatko</p>
+</footer>
+</body>
+
+</html>

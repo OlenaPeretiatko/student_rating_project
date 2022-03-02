@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='stylesheets/users.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_authenticated %}
+            <li class="active"><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="content">
+    {% for user in users %}
+    <div class="user">
+        <div class="contentLeft">
+            <a href="users/{{user['username']}}">
+                <h2>{{ user['username'] }}</h2>
+            </a>
+
+            <p>First Name: {{user.first_name}}</p>
+            <p>Last Name: {{user.last_name}}</p>
+            <p>Phone: {{user.phone}}</p>
+            <p>Email: {{user.email}}</p>
+        </div>
+        <div class="myBtns">
+            <a href="edit/{{user['username']}}">
+                <button>Edit User</button>
+            </a>
+            <form action="delete/{{user['username']}}" method="POST">
+                <input type="submit" value="Delete User"
+                       class="btn btn-danger btn-sm">
+            </form>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</main>
+<footer>
+    <p>2022 &copy;Copyright by Olena Peretiatko</p>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='stylesheets/rating.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_authenticated %}
+            <li><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+                <li class="active right"><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="content">
+    <table>
+        <tr>
+            <th>Rating</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Mark</th>
+        </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{loop.index}}.</td>
+                <td>{{student.name_student}}</td>
+                <td>{{student.last_name_student}}</td>
+                <td>{{student.grade}}</td>
+            </tr>
+            {% endfor %}
+    </table>
+</main>
+<footer>
+    <p>2022 &copy;Copyright by Olena Peretiatko</p>
+</footer>
+</body>
+</html>

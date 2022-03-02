@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='stylesheets/users.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a>
+                {% if current_user.is_admin %}
+            <li><a href="/users">Users</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated == False %}
+            <li><a href="/register">Register</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="active"><a href="/students">Students</a></li>
+            <div class="right">
+                <li class="right"><a href="/profile">Profile</a></li>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="content">
+    <div>
+        <h1>See all marks</h1>
+        {% for mark in marks %}
+        {% if full_names != '' %}
+        <p>Full name of student: {{full_names[loop.index-1]}} </p>
+        <p>Subject: {{subjects[loop.index-1]}} </p>
+        <p>Mark: {{mark['grade']}}</p>
+        <p>Teacher: {{teachers[loop.index-1]}}</p>
+    {% if current_user.is_admin %}
+    <form action="deleteMark/{{mark['id_mark']}}" method="POST">
+        <input type="submit" value="Delete Mark"
+               class="btn btn-danger btn-sm">
+        {% endif %}
+    </form>
+    <hr>
+    {% endif %}
+    {% endfor %}
+    </div>
+</main>
+<footer>
+    <p>2022 &copy;Copyright by Olena Peretiatko</p>
+</footer>
+</body>
+</html>
